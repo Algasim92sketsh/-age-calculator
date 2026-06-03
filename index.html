@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حاسبة العمر - تطوير أبو القاسم</title>
+    <title>حاسبة العمر - أبوالقاسم معتصم الخير</title>
     <style>
         /* خلفية سينمائية متحركة */
         body {
@@ -36,7 +36,15 @@
             text-align: center;
             color: white;
         }
-        .dev-name { font-size: 1.2em; margin-bottom: 20px; font-weight: bold; color: #ffd700; text-shadow: 0 0 10px rgba(0,0,0,0.5); }
+        /* تعديل الاسم ليكون 3D فخم */
+        .dev-name { 
+            font-size: 1.6em; 
+            margin-bottom: 25px; 
+            font-weight: bold; 
+            color: #fff; 
+            text-shadow: 2px 2px 0px #b21f1f, 4px 4px 0px rgba(0,0,0,0.4);
+            letter-spacing: 1px;
+        }
         input { width: 25%; padding: 15px; border-radius: 20px; border: none; text-align: center; margin: 5px; font-size: 18px; background: rgba(255,255,255,0.9); }
         button { width: 85%; padding: 15px; border-radius: 20px; border: none; background: #ff416c; color: white; font-size: 20px; margin-top: 20px; cursor: pointer; transition: 0.4s; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
         button:hover { transform: translateY(-5px); background: #ff4b2b; }
@@ -46,7 +54,7 @@
 </head>
 <body>
     <div class="glass-card">
-        <div class="dev-name">تطوير: أبو القاسم</div>
+        <div class="dev-name">تطوير: أبوالقاسم معتصم الخير</div>
         <h3>حاسبة العمر الدقيقة</h3>
         <input type="number" id="day" placeholder="يوم">
         <input type="number" id="month" placeholder="شهر">
@@ -59,6 +67,7 @@
             const d = parseInt(document.getElementById('day').value);
             const m = parseInt(document.getElementById('month').value) - 1;
             const y = parseInt(document.getElementById('year').value);
+            if(!d || !m || !y) return alert("الرجاء إدخال التاريخ كاملاً");
             const birth = new Date(y, m, d);
             const now = new Date();
             let years = now.getFullYear() - birth.getFullYear();
