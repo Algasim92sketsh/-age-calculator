@@ -2,52 +2,69 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>أبوالقاسم معتصم الخير</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حاسبة العمر - أبوالقاسم معتصم الخير</title>
     <link href="https://fonts.googleapis.com/css2?family=Lateef:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0; padding: 0; height: 100vh;
             display: flex; justify-content: center; align-items: center;
-            background: linear-gradient(135deg, #74ebd5, #9face6); /* لون هادئ */
-            background-size: 200% 200%;
-            animation: bgMove 10s ease infinite;
+            /* استرجاع ألوانك مع إضافة الحركة */
+            background: linear-gradient(135deg, #2c3e50, #4ca1af, #2c3e50);
+            background-size: 300% 300%;
+            animation: gradientBG 10s ease infinite;
             font-family: 'Lateef', serif;
             overflow: hidden;
         }
-        @keyframes bgMove { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
-        .box-all {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 15px; border-radius: 20px;
-            width: 85%; max-width: 350px;
-            text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        @keyframes gradientBG {
+            0% {background-position: 0% 50%}
+            50% {background-position: 100% 50%}
+            100% {background-position: 0% 50%}
         }
-        h2 { color: #555; margin: 5px 0; }
-        input { width: 80%; padding: 8px; margin: 3px; border-radius: 5px; border: 1px solid #ccc; text-align: center; }
-        button { width: 85%; padding: 10px; background: #9face6; border: none; color: white; font-weight: bold; margin-top: 5px; cursor: pointer; }
-        .grid-final { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-top: 10px; }
-        .item { background: #f0f0f0; padding: 5px; border-radius: 5px; border: 1px solid #ddd; }
+        .main-card {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px; border-radius: 20px;
+            border: 2px solid #FFD700;
+            width: 90%; max-width: 350px;
+            text-align: center; color: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        h2 { color: #FFD700; font-size: 2.2em; margin: 5px 0; }
+        input { 
+            width: 85%; padding: 10px; margin: 5px; border-radius: 8px; 
+            border: 1px solid #FFD700; background: rgba(255,255,255,0.1); 
+            color: white; text-align: center; font-size: 18px;
+        }
+        button { 
+            width: 90%; padding: 12px; background: #FFD700; border: none; 
+            color: black; font-weight: bold; font-size: 20px; margin-top: 10px; 
+            cursor: pointer; border-radius: 8px;
+        }
+        .grid-res { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+        .item { background: rgba(255, 215, 0, 0.1); padding: 8px; border-radius: 8px; border: 1px solid #FFD700; }
+        .val { color: #FFD700; font-size: 1.6em; display: block; }
     </style>
 </head>
 <body>
-    <div class="box-all">
+    <div class="main-card">
         <h2>أبوالقاسم معتصم الخير</h2>
         <input type="number" id="d" placeholder="اليوم">
         <input type="number" id="m" placeholder="الشهر">
         <input type="number" id="y" placeholder="السنة">
-        <button onclick="f()">احسب الآن</button>
-        <div class="grid-final" id="res"></div>
+        <button onclick="calc()">احسب الآن</button>
+        <div class="grid-res" id="res"></div>
     </div>
     <script>
-        function f() {
+        function calc() {
             const d = document.getElementById('d').value, m = document.getElementById('m').value-1, y = document.getElementById('y').value;
+            if(!d || !m || !y) return alert("الرجاء إدخال التاريخ كاملاً");
             const b = new Date(y, m, d), n = new Date();
             let Y = n.getFullYear() - b.getFullYear(), M = n.getMonth() - b.getMonth(), D = n.getDate() - b.getDate();
             if(D<0){M--; D+=30;} if(M<0){Y--; M+=12;}
             document.getElementById('res').innerHTML = `
-                <div class="item"><b>${Y}</b>سنة</div><div class="item"><b>${M}</b>شهر</div>
-                <div class="item"><b>${D}</b>يوم</div><div class="item"><b>${n.getHours()}</b>ساعة</div>
-                <div class="item"><b>${n.getMinutes()}</b>دقيقة</div><div class="item"><b>${n.getSeconds()}</b>ثانية</div>
+                <div class="item"><b class="val">${Y}</b>سنة</div><div class="item"><b class="val">${M}</b>شهر</div>
+                <div class="item"><b class="val">${D}</b>يوم</div><div class="item"><b class="val">${n.getHours()}</b>ساعة</div>
+                <div class="item"><b class="val">${n.getMinutes()}</b>دقيقة</div><div class="item"><b class="val">${n.getSeconds()}</b>ثانية</div>
             `;
         }
     </script>
